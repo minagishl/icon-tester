@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .preview {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .platform-row {
+            display: table-row;
+        }
+
+        .platform {
+            display: table-cell;
+            padding-right: 20px;
+        }
+
+        .platform img {
+            display: block;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #githubPreview {
+            border-radius: 0.375rem;
+        }
+
+        #twitterPreview {
+            border-radius: 50%;
+        }
+
+        #discordPreview {
+            border-radius: 50%;
+        }
+
+        #discordSelectPreview {
+            border-radius: 35%;
+        }
+
+        #slackPreview {
+            border-radius: 25%;
+        }
+
+        #mastodonPreview {
+            border-radius: 8px;
+        }
+
+        .toggle {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Icon Tester</h1>
+    <p>Upload an image to preview how it will look on various platforms:</p>
+
+    <input type="file" id="iconInput" accept="image/*">
+
+    <div class="toggle">
+        <input type="checkbox" id="toggleGitHub" checked>
+        <label for="toggleGitHub">Show GitHub</label>
+    </div>
+    <div class="toggle">
+        <input type="checkbox" id="toggleTwitter" checked>
+        <label for="toggleTwitter">Show Twitter</label>
+    </div>
+    <div class="toggle">
+        <input type="checkbox" id="toggleDiscord" checked>
+        <label for="toggleDiscord">Show Discord</label>
+    </div>
+    <div class="toggle">
+        <input type="checkbox" id="toggleSlack" checked>
+        <label for="toggleSlack">Show Slack</label>
+    </div>
+    <div class="toggle">
+        <input type="checkbox" id="toggleMastodon" checked>
+        <label for="toggleMastodon">Show Mastodon</label>
+    </div>
+
+    <div id="preview" class="preview">
+        <div class="platform-row">
+            <div class="platform" id="githubContainer">
+                <h2>GitHub Org (200x200px)</h2>
+                <img id="githubPreview" width="100" height="100" alt="GitHub Org Preview">
+            </div>
+            <div class="platform" id="twitterContainer">
+                <h2>Twitter (400x400px)</h2>
+                <img id="twitterPreview" width="134" height="134" alt="Twitter Preview">
+            </div>
+            <div class="platform" id="discordContainer">
+                <h2>Discord (240x240px)</h2>
+                <div class="flex">
+                    <div>
+                        <img id="discordPreview" width="48" height="48" alt="Discord Preview">
+                    </div>
+                    <div>
+                        <img id="discordSelectPreview" width="48" height="48" alt="Discord Select Preview">
+                    </div>
+                </div>
+            </div>
+            <div class="platform" id="slackContainer">
+                <h2>Slack (88x88px)</h2>
+                <img id="slackPreview" width="36" height="36" alt="Slack Preview">
+            </div>
+            <div class="platform" id="mastodonContainer">
+                <h2>Mastodon (400x400px)</h2>
+                <img id="mastodonPreview" width="90" height="90" alt="Mastodon Preview">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('iconInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('preview').style.display = 'table'; // Show the preview
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const previews = [
+                        'githubPreview',
+                        'twitterPreview',
+                        'discordPreview',
+                        'discordSelectPreview',
+                        'slackPreview',
+                        'mastodonPreview'
+                    ];
+                    previews.forEach(id => {
+                        const img = document.getElementById(id);
+                        img.src = e.target.result; // Set image source
+                        img.classList.remove('default-bg'); // Remove default background color
+                    });
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Toggle visibility of each platform's preview
+        document.getElementById('toggleGitHub').addEventListener('change', function () {
+            document.getElementById('githubContainer').style.display = this.checked ? 'table-cell' : 'none';
+        });
+
+        document.getElementById('toggleTwitter').addEventListener('change', function () {
+            document.getElementById('twitterContainer').style.display = this.checked ? 'table-cell' : 'none';
+        });
+
+        document.getElementById('toggleDiscord').addEventListener('change', function () {
+            document.getElementById('discordContainer').style.display = this.checked ? 'table-cell' : 'none';
+        });
+
+        document.getElementById('toggleSlack').addEventListener('change', function () {
+            document.getElementById('slackContainer').style.display = this.checked ? 'table-cell' : 'none';
+        });
+
+        document.getElementById('toggleMastodon').addEventListener('change', function () {
+            document.getElementById('mastodonContainer').style.display = this.checked ? 'table-cell' : 'none';
+        });
+    </script>
+
+</body>
+
+</html>
