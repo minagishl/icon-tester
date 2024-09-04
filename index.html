@@ -46,6 +46,10 @@
             border-radius: 50%;
         }
 
+        #twitterOrgPreview {
+            border-radius: 0.7rem;
+        }
+
         #discordPreview {
             border-radius: 50%;
         }
@@ -104,9 +108,16 @@
                 <h2>GitHub Org (200x200px)</h2>
                 <img id="githubPreview" width="100" height="100" alt="GitHub Org Preview">
             </div>
-            <div class="platform" id="twitterContainer">
+            <div class="platform" id="discordContainer">
                 <h2>Twitter (400x400px)</h2>
-                <img id="twitterPreview" width="134" height="134" alt="Twitter Preview">
+                <div class="flex">
+                    <div>
+                        <img id="twitterPreview" width="134" height="134" alt="Twitter Preview">
+                    </div>
+                    <div>
+                        <img id="twitterOrgPreview" width="134" height="134" alt="Twitter Org Preview">
+                    </div>
+                </div>
             </div>
             <div class="platform" id="discordContainer">
                 <h2>Discord (240x240px)</h2>
@@ -140,6 +151,7 @@
                     const previews = [
                         'githubPreview',
                         'twitterPreview',
+                        'twitterOrgPreview',
                         'discordPreview',
                         'discordSelectPreview',
                         'slackPreview',
@@ -162,6 +174,7 @@
 
         document.getElementById('toggleTwitter').addEventListener('change', function () {
             document.getElementById('twitterContainer').style.display = this.checked ? 'block' : 'none';
+            document.getElementById('twitterOrgContainer').style.display = this.checked ? 'block' : 'none';
         });
 
         document.getElementById('toggleDiscord').addEventListener('change', function () {
